@@ -1,11 +1,12 @@
 V1.1.1 Update
 1. Reverted PID value back to v1.0 version.
-2. 
+
 
 V1.1 Update
 1. Fixed flowrate command M221 problem. Previous official version won't take effect under certain situations.
 2. Changed PID value for V2 hotend.
 
+#Tips: Please download the latest arduino addons for Marlin from the official Marlin repository and install them in the library folder before compiling codes for Raise3D firmware.
 
 # Marlin-Raise3D-N-Series
 Modified Marlin firmware for Raise3D N Series Printers.
