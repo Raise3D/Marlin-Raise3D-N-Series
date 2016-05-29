@@ -3800,14 +3800,25 @@ inline void gcode_M220() {
  * M221: Set extrusion percentage (M221 T0 S95)
  */
 inline void gcode_M221() {
-  if (code_seen('S')) {
-    int sval = code_value();
+
     if (code_seen('T')) {
-      if (setTargetedHotend(221)) return;
+	  tmp_extruder = code_value();
+		if (code_seen('S')) {
+			int sval = code_value();
       extruder_multiply[tmp_extruder] = sval;
+	  SERIAL_PROTOCOLLN(sval);
+	  if (tmp_extruder == 0) {SERIAL_PROTOCOLLN(0);}
+	  else{
+		  SERIAL_PROTOCOLLN(1);}
+	  SERIAL_PROTOCOLLN(extruder_multiply[0]);
+	  SERIAL_PROTOCOLLN(extruder_multiply[1]);
     }
     else {
-      extrudemultiply = sval;
+		if (code_seen('S')) {
+			int sval = code_value();
+		    extrudemultiply = sval;
+		}
+  
     }
   }
 }

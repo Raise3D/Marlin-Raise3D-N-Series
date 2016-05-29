@@ -38,7 +38,7 @@ Here are some standard links for getting your machine calibrated:
 // User-specified version info of this build to display in [Pronterface, etc] terminal window during
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
-#define STRING_VERSION "1.0.2"
+#define STRING_VERSION "1.1.1"
 #define STRING_URL "reprap.org"
 #define STRING_VERSION_CONFIG_H __DATE__ " " __TIME__ // build date and time
 #define STRING_CONFIG_H_AUTHOR "(none, default config)" // Who made the changes.
@@ -51,9 +51,9 @@ Here are some standard links for getting your machine calibrated:
 #define SERIAL_PORT 0
 
 //=====Raise3D modified======//
-#define RAISE_VERSION 1.0.1
+#define RAISE_VERSION 1.1.1
 #define N_SERIES_PROTOCLE
-#define N2
+#define N2PLUS
 
 
 
@@ -195,10 +195,15 @@ Here are some standard links for getting your machine calibrated:
   #define PID_dT ((OVERSAMPLENR * 10.0)/(F_CPU / 64.0 / 256.0)) //sampling period of the temperature routine
 
 // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
-// Ultimaker
-    #define  DEFAULT_Kp 14.49
-   #define  DEFAULT_Ki 0.8
-   #define  DEFAULT_Kd 65.52
+// N series KS version
+     #define  DEFAULT_Kp 14.49
+    #define  DEFAULT_Ki 0.8
+    #define  DEFAULT_Kd 65.52
+
+//Test V2 hotend
+//    #define  DEFAULT_Kp 10.65
+//   #define  DEFAULT_Ki 0.39
+//   #define  DEFAULT_Kd 72.40
 
 //new 300
 // #define  DEFAULT_Kp 4.12
@@ -535,7 +540,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define DEFAULT_MAX_FEEDRATE          {300, 300, 5, 25}    // (mm/sec)
 #define DEFAULT_MAX_ACCELERATION      {9000,9000,100,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
 
-#define DEFAULT_ACCELERATION          800    // X, Y, Z and E acceleration in mm/s^2 for printing moves
+#define DEFAULT_ACCELERATION          1000    // X, Y, Z and E acceleration in mm/s^2 for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  3000   // E acceleration in mm/s^2 for retracts
 #define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z acceleration in mm/s^2 for travel (non printing) moves
 

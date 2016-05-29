@@ -601,9 +601,13 @@ block->steps_y = labs((target[X_AXIS]-position[X_AXIS]) - (target[Y_AXIS]-positi
 #endif
   block->steps_z = labs(target[Z_AXIS]-position[Z_AXIS]);
   block->steps_e = labs(target[E_AXIS]-position[E_AXIS]);
-  block->steps_e *= volumetric_multiplier[active_extruder];
-  block->steps_e *= extrudemultiply;
-  block->steps_e /= 100;
+  block->steps_e *= volumetric_multiplier[extruder];
+//   SERIAL_PROTOCOLLN("Block");
+//   SERIAL_PROTOCOLLN(extruder_multiply[extruder]);
+//   SERIAL_PROTOCOLLN(block->steps_e);
+  block->steps_e *= extruder_multiply[extruder];
+  block->steps_e = round(block->steps_e/100.0);
+  SERIAL_PROTOCOLLN(block->steps_e);
   block->step_event_count = max(block->steps_x, max(block->steps_y, max(block->steps_z, block->steps_e)));
 
   // Bail if this is a zero-length block
@@ -757,7 +761,7 @@ Having the real displacement of the head, we can calculate the total movement le
     delta_mm[Y_AXIS] = ((target[X_AXIS]-position[X_AXIS]) - (target[Y_AXIS]-position[Y_AXIS]))/axis_steps_per_unit[Y_AXIS];
   #endif
   delta_mm[Z_AXIS] = (target[Z_AXIS]-position[Z_AXIS])/axis_steps_per_unit[Z_AXIS];
-  delta_mm[E_AXIS] = ((target[E_AXIS]-position[E_AXIS])/axis_steps_per_unit[E_AXIS])*volumetric_multiplier[active_extruder]*extrudemultiply/100.0;
+  delta_mm[E_AXIS] = ((target[E_AXIS]-position[E_AXIS])/axis_steps_per_unit[E_AXIS])*volumetric_multiplier[extruder];
   if ( block->steps_x <=dropsegments && block->steps_y <=dropsegments && block->steps_z <=dropsegments )
   {
     block->millimeters = fabs(delta_mm[E_AXIS]);
