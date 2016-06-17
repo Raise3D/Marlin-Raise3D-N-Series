@@ -1,5 +1,8 @@
 Update History:
 
+v1.1.2 Update
+1.Modified M112 kill function to implement fast stop feature.
+
 V1.1.1 Update
 1. Reverted PID value back to v1.0 version.
 
