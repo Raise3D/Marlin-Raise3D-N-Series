@@ -5827,7 +5827,7 @@ void manage_inactivity(bool ignore_stepper_queue/*=false*/) //default argument s
   check_axes_activity();
 }
 
-void (*resetFunc) (void) = 0
+void (*resetFunc) (void) = 0;
 
 void kill()
 {
