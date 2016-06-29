@@ -51,11 +51,11 @@ Here are some standard links for getting your machine calibrated:
 #define SERIAL_PORT 0
 
 //=====Raise3D modified======//
-#define RAISE_VERSION 1.1.2
+#define RAISE_VERSION 1.1.3
 #define N_SERIES_PROTOCLE
 #define N2PLUS
 
-
+//#define DUAL  //Comment this line to get single head version firmware.
 
 
 // This determines the communication speed of the printer
@@ -78,7 +78,12 @@ Here are some standard links for getting your machine calibrated:
 // #define MACHINE_UUID "00000000-0000-0000-0000-000000000000"
 
 // This defines the number of extruders
-#define EXTRUDERS 2
+#ifdef  DUAL
+	#define EXTRUDERS 2
+#else
+	#define EXTRUDERS 1
+#endif
+
 
 //// The following define selects which power supply you have. Please choose the one that matches your setup
 // 1 = ATX
@@ -132,7 +137,13 @@ Here are some standard links for getting your machine calibrated:
 //     #define DUMMY_THERMISTOR_999_VALUE 100
 
 #define TEMP_SENSOR_0 -1
+
+#ifdef DUAL
 #define TEMP_SENSOR_1 -1
+#else
+#define TEMP_SENSOR_1 0
+#endif
+
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_BED 8

@@ -2990,7 +2990,7 @@ inline void gcode_M105() {
       SERIAL_PROTOCOLPGM(" /");
       SERIAL_PROTOCOL_F(degTargetBed(),1);
     #endif //TEMP_BED_PIN
-    for (int8_t cur_extruder = 0; cur_extruder < EXTRUDERS; ++cur_extruder) {
+    for (int8_t cur_extruder = 0; cur_extruder < 2; ++cur_extruder) {
       SERIAL_PROTOCOLPGM(" T");
       SERIAL_PROTOCOL(cur_extruder);
       SERIAL_PROTOCOLPGM(":");
@@ -5827,11 +5827,11 @@ void manage_inactivity(bool ignore_stepper_queue/*=false*/) //default argument s
   check_axes_activity();
 }
 
-void (*resetFunc) (void) = 0
+void (*resetFunc) (void) = 0;
 
 void kill()
 {
-  resetFunc();
+  //resetFunc();
 
   cli(); // Stop interrupts
   disable_heater();
