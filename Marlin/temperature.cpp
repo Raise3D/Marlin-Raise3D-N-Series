@@ -522,6 +522,7 @@ inline void _temp_error(int e, const char *msg1, const char *msg2) {
   if (!IsStopped()) {
     SERIAL_ERROR_START;
     if (e >= 0) SERIAL_ERRORLN((int)e);
+    SERIAL_ECHO(e);
     serialprintPGM(msg1);
     MYSERIAL.write('\n');
     #ifdef ULTRA_LCD

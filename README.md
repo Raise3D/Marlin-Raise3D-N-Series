@@ -2,6 +2,11 @@
 Modified Marlin firmware for Raise3D N Series Printers.  
 
 ##Update History:  
+####v1.1.4:  
+* Enlarged thermal runaway protection range to fix the thermal error on certain machines(Thermal protection code contributed by Jetguy).  
+* Add extruder number while throwing out max or min temperature error to help identify the corresponding thermalcouple.  
+
+
 ####v1.1.3:  
 * Reverted reset function to v1.1.1 implementation.  
 * Add compile option for single extruder. (uncomment #define DUAL to get dual head version.) In case to avoid the damaged second thermocouple on single head machine to generate an error.  
