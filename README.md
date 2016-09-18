@@ -3,8 +3,8 @@ Modified Marlin firmware for Raise3D N Series Printers.
 
 ##Update History:  
 ####v1.1.5:  
-* Reimplemented thermal runaway function, added protection by change gcode.  
-* Temperature reporting during heating reported.  
+* Reimplemented thermal runaway function, added protection while changed by gcode.  
+* Temperature reporting during heating period fixed.  
 
 
 ####v1.1.4:  
