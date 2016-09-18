@@ -3193,9 +3193,32 @@ inline void gcode_M109() {
 #ifdef N_SERIES_PROTOCLE
 		  SERIAL_PROTOCOLPGM(" D:");
 		  SERIAL_PROTOCOL_F(degTargetHotend(tmp_extruder),1);
-		  SERIAL_PROTOCOLLN("");
-#endif
 
+#if defined(TEMP_BED_PIN) && TEMP_BED_PIN > -1
+		  SERIAL_PROTOCOLPGM(" B:");
+		  SERIAL_PROTOCOL_F(degBed(),1);
+		  SERIAL_PROTOCOLPGM(" /");
+		  SERIAL_PROTOCOL_F(degTargetBed(),1);
+#endif //TEMP_BED_PIN
+		  for (int8_t cur_extruder = 0; cur_extruder < 2; ++cur_extruder) {
+			  SERIAL_PROTOCOLPGM(" T");
+			  SERIAL_PROTOCOL(cur_extruder);
+			  SERIAL_PROTOCOLPGM(":");
+			  SERIAL_PROTOCOL_F(degHotend(cur_extruder),1);
+			  SERIAL_PROTOCOLPGM(" /");
+			  SERIAL_PROTOCOL_F(degTargetHotend(cur_extruder),1);
+			  SERIAL_PROTOCOLPGM(" F");
+			  SERIAL_PROTOCOL(cur_extruder);
+			  SERIAL_PROTOCOLPGM(":");
+			  SERIAL_PROTOCOL(extruder_multiply[cur_extruder]);
+		  }
+		  SERIAL_PROTOCOLPGM(" S:");
+		  SERIAL_PROTOCOL(fanSpeed);
+		  SERIAL_PROTOCOLPGM(" P:");
+		  SERIAL_PROTOCOL(feedmultiply);
+#endif
+		
+		SERIAL_PROTOCOLLN("");
         timetemp = millis();
 		
       }
@@ -3249,6 +3272,29 @@ inline void gcode_M109() {
 #ifdef N_SERIES_PROTOCLE
 		SERIAL_PROTOCOLPGM(" D:");
 		SERIAL_PROTOCOL_F(degTargetBed(), 1);
+
+#if defined(TEMP_BED_PIN) && TEMP_BED_PIN > -1
+		SERIAL_PROTOCOLPGM(" B:");
+		SERIAL_PROTOCOL_F(degBed(),1);
+		SERIAL_PROTOCOLPGM(" /");
+		SERIAL_PROTOCOL_F(degTargetBed(),1);
+#endif //TEMP_BED_PIN
+		for (int8_t cur_extruder = 0; cur_extruder < 2; ++cur_extruder) {
+			SERIAL_PROTOCOLPGM(" T");
+			SERIAL_PROTOCOL(cur_extruder);
+			SERIAL_PROTOCOLPGM(":");
+			SERIAL_PROTOCOL_F(degHotend(cur_extruder),1);
+			SERIAL_PROTOCOLPGM(" /");
+			SERIAL_PROTOCOL_F(degTargetHotend(cur_extruder),1);
+			SERIAL_PROTOCOLPGM(" F");
+			SERIAL_PROTOCOL(cur_extruder);
+			SERIAL_PROTOCOLPGM(":");
+			SERIAL_PROTOCOL(extruder_multiply[cur_extruder]);
+		}
+		SERIAL_PROTOCOLPGM(" S:");
+		SERIAL_PROTOCOL(fanSpeed);
+		SERIAL_PROTOCOLPGM(" P:");
+		SERIAL_PROTOCOL(feedmultiply);
 #endif
         SERIAL_PROTOCOLLN("");
       }

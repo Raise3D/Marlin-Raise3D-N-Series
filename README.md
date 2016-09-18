@@ -2,6 +2,11 @@
 Modified Marlin firmware for Raise3D N Series Printers.  
 
 ##Update History:  
+####v1.1.5:  
+* Reimplemented thermal runaway function, added protection by change gcode.  
+* Temperature reporting during heating reported.  
+
+
 ####v1.1.4:  
 * Enlarged thermal runaway protection range to fix the thermal error on certain machines(Thermal protection code contributed by Jetguy).  
 * Add extruder number while throwing out max or min temperature error to help identify the corresponding thermalcouple.  
@@ -22,7 +27,7 @@ Modified Marlin firmware for Raise3D N Series Printers.
 * Changed PID value for V2 hotend.  
 
 ##Compilation guide:  
-Compile the codes with Arduino IDE(versions above 1.0.5) or other compatible compliers.  
+Compile the codes with Arduino IDE(version 1.0.5 suggested) or other compatible compliers.  
 Take Arduino IDE as an example:  
 * Please download the latest arduino addons for Marlin from the official Marlin repository and install them in the library folder before compiling codes for Raise3D firmware.  
 * Make sure all the library folders under Arduino Addons directory are copied into arduino install directory before compilation. Or you will encounter an error that missing the u8glib.  

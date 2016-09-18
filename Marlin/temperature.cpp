@@ -1087,6 +1087,9 @@ void thermal_runaway_protection(int *state, unsigned long *timer, float temperat
   }
   switch (*state)
   {
+	case -1: // Change temperature by gcode
+	  if (temperature >= target_temperature) *state = 2;
+	  break;
     case 0: // "Heater Inactive" state
       if (target_temperature > 0) *state = 1;
       break;
