@@ -96,8 +96,19 @@ FORCE_INLINE float degBed() { return current_temperature_bed; }
 FORCE_INLINE float degTargetHotend(uint8_t extruder) { return target_temperature[extruder]; }
 FORCE_INLINE float degTargetBed() { return target_temperature_bed; }
 
-FORCE_INLINE void setTargetHotend(const float &celsius, uint8_t extruder) { target_temperature[extruder] = celsius; }
-FORCE_INLINE void setTargetBed(const float &celsius) { target_temperature_bed = celsius; }
+#if defined (THERMAL_RUNAWAY_PROTECTION_PERIOD) && THERMAL_RUNAWAY_PROTECTION_PERIOD > 0
+void thermal_runaway_protection(int *state, unsigned long *timer, float temperature, float target_temperature, int heater_id, int period_seconds, int hysteresis_degc);
+static int thermal_runaway_state_machine[4]; // = {0,0,0,0};
+static unsigned long thermal_runaway_timer[4]; // = {0,0,0,0};
+static bool thermal_runaway = false;
+#if TEMP_SENSOR_BED != 0
+static int thermal_runaway_bed_state_machine;
+static unsigned long thermal_runaway_bed_timer;
+#endif
+#endif
+
+FORCE_INLINE void setTargetHotend(const float &celsius, uint8_t extruder) { target_temperature[extruder] = celsius;  thermal_runaway_state_machine[extruder] = -1;}
+FORCE_INLINE void setTargetBed(const float &celsius) { target_temperature_bed = celsius;  thermal_runaway_bed_state_machine = -1;}
 
 FORCE_INLINE bool isHeatingHotend(uint8_t extruder) { return target_temperature[extruder] > current_temperature[extruder]; }
 FORCE_INLINE bool isHeatingBed() { return target_temperature_bed > current_temperature_bed; }
@@ -146,16 +157,7 @@ void disable_heater();
 void setWatch();
 void updatePID();
 
-#if defined (THERMAL_RUNAWAY_PROTECTION_PERIOD) && THERMAL_RUNAWAY_PROTECTION_PERIOD > 0
-void thermal_runaway_protection(int *state, unsigned long *timer, float temperature, float target_temperature, int heater_id, int period_seconds, int hysteresis_degc);
-static int thermal_runaway_state_machine[4]; // = {0,0,0,0};
-static unsigned long thermal_runaway_timer[4]; // = {0,0,0,0};
-static bool thermal_runaway = false;
-#if TEMP_SENSOR_BED != 0
-  static int thermal_runaway_bed_state_machine;
-  static unsigned long thermal_runaway_bed_timer;
-#endif
-#endif
+
 
 FORCE_INLINE void autotempShutdown() {
   #ifdef AUTOTEMP

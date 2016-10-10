@@ -38,7 +38,7 @@ Here are some standard links for getting your machine calibrated:
 // User-specified version info of this build to display in [Pronterface, etc] terminal window during
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
-#define STRING_VERSION "1.1.3"
+#define STRING_VERSION "1.1.5"
 #define STRING_URL "reprap.org"
 #define STRING_VERSION_CONFIG_H __DATE__ " " __TIME__ // build date and time
 #define STRING_CONFIG_H_AUTHOR "(none, default config)" // Who made the changes.
@@ -51,7 +51,7 @@ Here are some standard links for getting your machine calibrated:
 #define SERIAL_PORT 0
 
 //=====Raise3D modified======//
-#define RAISE_VERSION 1.1.3
+#define RAISE_VERSION STRING_VERSION
 #define N_SERIES_PROTOCLE
 #define N2PLUS
 
@@ -316,14 +316,14 @@ your extruder heater takes 2 minutes to hit the target on heating.
 
 // Parameters for all extruder heaters
 #define THERMAL_RUNAWAY_PROTECTION_PERIOD 40 //in seconds
-#define THERMAL_RUNAWAY_PROTECTION_HYSTERESIS 4 // in degree Celsius
+#define THERMAL_RUNAWAY_PROTECTION_HYSTERESIS 8 // in degree Celsius
 
 // If you want to enable this feature for your bed heater,
 // uncomment the 2 defines below:
 
 // Parameters for the bed heater
 #define THERMAL_RUNAWAY_PROTECTION_BED_PERIOD 40 //in seconds
-#define THERMAL_RUNAWAY_PROTECTION_BED_HYSTERESIS 2 // in degree Celsius
+#define THERMAL_RUNAWAY_PROTECTION_BED_HYSTERESIS 4 // in degree Celsius
 
 
 //===========================================================================
@@ -407,6 +407,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define Y_MAX_POS 305
 #define Z_MAX_POS 610 
 #endif
+
 
 #define X_MAX_LENGTH (X_MAX_POS - X_MIN_POS)
 #define Y_MAX_LENGTH (Y_MAX_POS - Y_MIN_POS)
