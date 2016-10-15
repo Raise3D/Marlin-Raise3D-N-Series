@@ -107,8 +107,8 @@ static unsigned long thermal_runaway_bed_timer;
 #endif
 #endif
 
-FORCE_INLINE void setTargetHotend(const float &celsius, uint8_t extruder) { target_temperature[extruder] = celsius;  thermal_runaway_state_machine[extruder] = -1;}
-FORCE_INLINE void setTargetBed(const float &celsius) { target_temperature_bed = celsius;  thermal_runaway_bed_state_machine = -1;}
+FORCE_INLINE void setTargetHotend(const float &celsius, uint8_t extruder) { target_temperature[extruder] = celsius; }
+FORCE_INLINE void setTargetBed(const float &celsius) { target_temperature_bed = celsius; }
 
 FORCE_INLINE bool isHeatingHotend(uint8_t extruder) { return target_temperature[extruder] > current_temperature[extruder]; }
 FORCE_INLINE bool isHeatingBed() { return target_temperature_bed > current_temperature_bed; }
