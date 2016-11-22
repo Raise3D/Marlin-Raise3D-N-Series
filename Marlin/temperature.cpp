@@ -1065,6 +1065,7 @@ void setWatch() {
 #if defined(THERMAL_RUNAWAY_PROTECTION_PERIOD) && THERMAL_RUNAWAY_PROTECTION_PERIOD > 0
 void thermal_runaway_protection(int *state, unsigned long *timer, float temperature, float target_temperature, int heater_id, int period_seconds, int hysteresis_degc)
 {
+   static float tr_target_temperature[EXTRUDERS + 1] = { 0.0 };
 /*
       SERIAL_ECHO_START;
       SERIAL_ECHO("Thermal Thermal Runaway Running. Heater ID:");
@@ -1085,11 +1086,16 @@ void thermal_runaway_protection(int *state, unsigned long *timer, float temperat
     *timer = 0;
     return;
   }
+  int heater_index = heater_id >= 0 ? heater_id : EXTRUDERS;
+
+    // If the target temperature changes, restart
+    if (tr_target_temperature[heater_index] != target_temperature) {
+      tr_target_temperature[heater_index] = target_temperature;
+      *state = target_temperature > 0 ? 1 : 0;
+    }
+  
   switch (*state)
   {
-	case -1: // Change temperature by gcode
-	  if (temperature >= target_temperature) *state = 2;
-	  break;
     case 0: // "Heater Inactive" state
       if (target_temperature > 0) *state = 1;
       break;
