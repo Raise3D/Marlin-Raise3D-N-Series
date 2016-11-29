@@ -1065,6 +1065,7 @@ void setWatch() {
 #if defined(THERMAL_RUNAWAY_PROTECTION_PERIOD) && THERMAL_RUNAWAY_PROTECTION_PERIOD > 0
 void thermal_runaway_protection(int *state, unsigned long *timer, float temperature, float target_temperature, int heater_id, int period_seconds, int hysteresis_degc)
 {
+<<<<<<< HEAD
 
 //      SERIAL_ECHO_START;
 //      SERIAL_ECHO("Thermal Thermal Runaway Running. Heater ID:");
@@ -1091,6 +1092,37 @@ void thermal_runaway_protection(int *state, unsigned long *timer, float temperat
     }
 
     
+=======
+   static float tr_target_temperature[EXTRUDERS + 1] = { 0.0 };
+/*
+      SERIAL_ECHO_START;
+      SERIAL_ECHO("Thermal Thermal Runaway Running. Heater ID:");
+      SERIAL_ECHO(heater_id);
+      SERIAL_ECHO(" ;  State:");
+      SERIAL_ECHO(*state);
+      SERIAL_ECHO(" ;  Timer:");
+      SERIAL_ECHO(*timer);
+      SERIAL_ECHO(" ;  Temperature:");
+      SERIAL_ECHO(temperature);
+      SERIAL_ECHO(" ;  Target Temp:");
+      SERIAL_ECHO(target_temperature);
+      SERIAL_ECHOLN("");    
+*/
+  if ((target_temperature == 0) || thermal_runaway)
+  {
+    *state = 0;
+    *timer = 0;
+    return;
+  }
+  int heater_index = heater_id >= 0 ? heater_id : EXTRUDERS;
+
+    // If the target temperature changes, restart
+    if (tr_target_temperature[heater_index] != target_temperature) {
+      tr_target_temperature[heater_index] = target_temperature;
+      *state = target_temperature > 0 ? 1 : 0;
+    }
+  
+>>>>>>> refs/remotes/Raise3D/master
   switch (*state)
   {
     case 0: // "Heater Inactive" state
