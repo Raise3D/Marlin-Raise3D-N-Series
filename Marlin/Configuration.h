@@ -38,11 +38,7 @@ Here are some standard links for getting your machine calibrated:
 // User-specified version info of this build to display in [Pronterface, etc] terminal window during
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
-<<<<<<< HEAD
-#define STRING_VERSION "1.1.5.1"
-=======
 #define STRING_VERSION "1.1.6"
->>>>>>> refs/remotes/Raise3D/master
 #define STRING_URL "reprap.org"
 #define STRING_VERSION_CONFIG_H __DATE__ " " __TIME__ // build date and time
 #define STRING_CONFIG_H_AUTHOR "(none, default config)" // Who made the changes.
@@ -59,7 +55,7 @@ Here are some standard links for getting your machine calibrated:
 #define N_SERIES_PROTOCLE
 #define N2PLUS
 
-#define DUAL  //Comment this line to get single head version firmware.
+//#define DUAL  //Comment this line to get single head version firmware.
 
 
 // This determines the communication speed of the printer
@@ -210,21 +206,6 @@ Here are some standard links for getting your machine calibrated:
   #define PID_dT ((OVERSAMPLENR * 10.0)/(F_CPU / 64.0 / 256.0)) //sampling period of the temperature routine
 
 // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
-// Custom PID for Insulated V2 Hotend
-//    #define  DEFAULT_Kp 17.32
-//    #define  DEFAULT_Ki 1.09
-//    #define  DEFAULT_Kd 68.96
-
-// N Series V2 Hotend V1 Thermo couple 
-//    #define  DEFAULT_Kp 23.47
-//    #define  DEFAULT_Ki 1.76
-//    #define  DEFAULT_Kd 78.44
-
-// N Series V2 Hotend V2 Thermo couple
-//    #define  DEFAULT_Kp 14.49
-//    #define  DEFAULT_Ki 0.8
-//    #define  DEFAULT_Kd 65.52
-
 // N series KS version
      #define  DEFAULT_Kp 14.49
     #define  DEFAULT_Ki 0.8
@@ -586,22 +567,6 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define DEFAULT_ZJERK                 0.4     // (mm/sec)
 #define DEFAULT_EJERK                 5.0    // (mm/sec)
 
-// The following settings are for Hybrid extruders, and allow new code added in gcode_t to change extruder speed during tool change without adding extra lines of code.
-#define DEFAULT_HYBRID true //This line will turn on HYBRID overides
-
-#define DEFAULT_EXT0_STEPE 140 //STEP-E for Extruder 0 Hybrid
-#define DEFAULT_EXT0_MAX_FEEDRATE 25 // (mm/sec) for Extruder 0 Hybrid
-#define DEFAULT_EXT0_MAX_ACCELERATION 10000 // maximum start speed for accelerated moves on Extruder 0 Hybrid
-#define DEFAULT_EXT0_ACCELERATION 1000 //Acceleration for Extruder 0 Hybrid
-#define DEFAULT_EXT0_RETRACT_ACCELERATION 3000 //Retract Acceleration for Extruder 0 Hybrid
-#define DEFAULT_EXT0_EJERK 5.0 //E-JERK for Extruder 0 Hybrid
-
-#define DEFAULT_EXT1_STEPE 476.5 //STEP-E for Extruder 1 Hybrid
-#define DEFAULT_EXT1_MAX_FEEDRATE 25 // (mm/sec) for Extruder 1 Hybrid
-#define DEFAULT_EXT1_MAX_ACCELERATION 10000 // maximum start speed for accelerated moves on Extruder 1 Hybrid
-#define DEFAULT_EXT1_ACCELERATION 1000 //Acceleration for Extruder 1 Hybrid
-#define DEFAULT_EXT1_RETRACT_ACCELERATION 3000 //Retract Acceleration for Extruder 1 Hybrid
-#define DEFAULT_EXT1_EJERK 5.0 //E-JERK for Extruder 1 Hybrid
 
 //=============================================================================
 //============================= Additional Features ===========================
