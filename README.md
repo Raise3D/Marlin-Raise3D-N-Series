@@ -2,6 +2,10 @@
 Modified Marlin firmware for Raise3D N Series Printers.  
 
 ##Update History:  
+####v1.1.6-rev1:  
+* Fixed a bug while heated bed was heating, the thermal_runaway function will operate invalid memory location to cause strange behaviour.  
+
+##Update History:  
 ####v1.1.6:  
 * Add history tracking into thermal runaway function, code copied from latest marlin branch.  
 
