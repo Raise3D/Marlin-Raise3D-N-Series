@@ -1080,12 +1080,15 @@ void thermal_runaway_protection(int *state, unsigned long *timer, float temperat
       SERIAL_ECHO(target_temperature);
       SERIAL_ECHOLN("");    
 */
-  if ((target_temperature == 0) || thermal_runaway)
+/*
+if ((target_temperature == 0) || thermal_runaway)
   {
     *state = 0;
     *timer = 0;
     return;
   }
+*/
+
   int heater_index = heater_id >= 0 ? heater_id : EXTRUDERS;
 
     // If the target temperature changes, restart
@@ -1093,7 +1096,7 @@ void thermal_runaway_protection(int *state, unsigned long *timer, float temperat
       tr_target_temperature[heater_index] = target_temperature;
       *state = target_temperature > 0 ? 1 : 0;
     }
-  
+  /*
   switch (*state)
   {
     case 0: // "Heater Inactive" state
@@ -1131,10 +1134,45 @@ void thermal_runaway_protection(int *state, unsigned long *timer, float temperat
         }
       }
     } break;
-  }
+  }*/
+    switch (*state)
+  {
+    case 0: // "Heater Inactive" state
+      break;
+    case 1: // "First Heating" state
+      if (temperature < tr_target_temperature[heater_index]) {
+      break;}
+      else *state = 2; 
+    case 2: // "Temperature Stable" state
+      if (temperature < tr_target_temperature[heater_index] - hysteresis_degc && ELAPSED(millis(), *timer))
+        *state = 3;
+      else
+        *timer = millis() + period_seconds * 1000UL;
+        break;
+    
+    case 3: // "Thermal Runaway" state
+        SERIAL_ERROR_START;
+        SERIAL_ERRORLNPGM(MSG_THERMAL_RUNAWAY_STOP);
+        SERIAL_ERRORLN((int)heater_id);
+        LCD_ALERTMESSAGEPGM(MSG_THERMAL_RUNAWAY); // translatable
+        thermal_runaway = true;
+        while(1)
+        {
+          disable_heater();
+          disable_x();
+          disable_y();
+          disable_z();
+          disable_e0();
+          disable_e1();
+          disable_e2();
+          disable_e3();
+          manage_heater();
+          lcd_update();
+        }
+        break;
+   }
 }
 #endif //THERMAL_RUNAWAY_PROTECTION_PERIOD
-
 
 void disable_heater() {
   for (int i=0; i<EXTRUDERS; i++) setTargetHotend(0, i);

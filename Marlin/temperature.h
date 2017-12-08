@@ -107,6 +107,9 @@ static unsigned long thermal_runaway_bed_timer;
 #endif
 #endif
 
+#define PENDING(NOW,SOON) ((long)(NOW-(SOON))<0)
+#define ELAPSED(NOW,SOON) (!PENDING(NOW,SOON))
+
 FORCE_INLINE void setTargetHotend(const float &celsius, uint8_t extruder) { target_temperature[extruder] = celsius; }// thermal_runaway_state_machine[extruder] = -1;}
 FORCE_INLINE void setTargetBed(const float &celsius) { target_temperature_bed = celsius;}//  thermal_runaway_bed_state_machine = -1;}
 
