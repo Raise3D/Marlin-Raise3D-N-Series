@@ -1,39 +1,39 @@
 # Marlin-Raise3D-N-Series  
 Modified Marlin firmware for Raise3D N Series Printers.  
 
-##Update History:  
-####v1.1.6-rev1:  
+## Update History:  
+#### v1.1.6-rev1:  
 * Fixed a bug while heated bed was heating, the thermal_runaway function will operate invalid memory location to cause strange behaviour.  
 
-##Update History:  
-####v1.1.6:  
+## Update History:  
+#### v1.1.6:  
 * Add history tracking into thermal runaway function, code copied from latest marlin branch.  
 
-####v1.1.5:  
+#### v1.1.5:  
 * Reimplemented thermal runaway function, added protection while changed by gcode.  
 * Temperature reporting during heating period fixed.  
 
 
-####v1.1.4:  
+#### v1.1.4:  
 * Enlarged thermal runaway protection range to fix the thermal error on certain machines(Thermal protection code contributed by Jetguy).  
 * Add extruder number while throwing out max or min temperature error to help identify the corresponding thermalcouple.  
 
 
-####v1.1.3:  
+#### v1.1.3:  
 * Reverted reset function to v1.1.1 implementation.  
 * Add compile option for single extruder. (uncomment #define DUAL to get dual head version.) In case to avoid the damaged second thermocouple on single head machine to generate an error.  
 
-####v1.1.2:  
+#### v1.1.2:  
 * Modified M112 kill function to implement fast stop feature.  
 
-####V1.1.1:  
+#### V1.1.1:  
 * Reverted PID value back to v1.0 version.  
 
-####V1.1:  
+#### V1.1:  
 * Fixed flowrate command M221 problem. Previous official version won't take effect under certain situations.  
 * Changed PID value for V2 hotend.  
 
-##Compilation guide:  
+## Compilation guide:  
 Compile the codes with Arduino IDE(version 1.0.5 suggested) or other compatible compliers.  
 Take Arduino IDE as an example:  
 * Please download the latest arduino addons for Marlin from the official Marlin repository and install them in the library folder before compiling codes for Raise3D firmware.  
