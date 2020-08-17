@@ -1,6 +1,9 @@
 # Marlin-Raise3D-N-Series  
 Modified Marlin firmware for Raise3D N Series Printers.  
 
+## Official website
+* [Raise3D Official Website](https://www.raise3d.com)
+
 ## Update History:  
 #### v1.1.6-rev1:  
 * Fixed a bug while heated bed was heating, the thermal_runaway function will operate invalid memory location to cause strange behaviour.  
